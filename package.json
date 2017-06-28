@@ -1,5 +1,5 @@
 {
-  "name": "FreeCodeCamp voting app",
+  "name": "fcc_voting_app",
   "version": "1.0.1",
   "description": "Voting app using clementinejs boilerplate",
   "main": "server.js",
