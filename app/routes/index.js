@@ -1,7 +1,7 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 
 module.exports = function (app, passport) {
 
@@ -13,10 +13,10 @@ module.exports = function (app, passport) {
 		}
 	}
 
-	var clickHandler = new ClickHandler();
+	var pollHandler = new PollHandler();
 
 	app.route('/')
-		.get(isLoggedIn, function (req, res) {
+		.get(function (req, res) {
 			res.sendFile(path + '/public/index.html');
 		});
 
@@ -36,9 +36,9 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/profile.html');
 		});
 
-	app.route('/api/:id')
-		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
+	app.route('/api/user')
+		.get(function (req, res) {
+		  (req.user) ? res.json(req.user) : res.json({"github": {"displayName": "Guest"}});
 		});
 
 	app.route('/auth/github')
@@ -50,8 +50,34 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 
-	app.route('/api/:id/clicks')
-		.get(isLoggedIn, clickHandler.getClicks)
-		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks);
+	app.route('/viewpolls')
+		.get(pollHandler.getPolls);
+		
+	app.route('/viewpolls/:pollid')
+		.get(pollHandler.viewPolls);
+		
+	app.route('/submitvote/:pollid/:pollval')
+		.post(pollHandler.submitVote);
+		
+    app.route('/submit')
+        .get(isLoggedIn, function(req, res) {
+        	res.sendFile(path + '/public/submit.html');
+        })
+        .post(isLoggedIn, pollHandler.getPolls2);
+        
+    app.route('/poll')
+		.get(function(req, res) {
+        	res.sendFile(path + '/public/poll.html');
+        });
+    app.route('/delete/:pollid')
+		.delete(isLoggedIn, pollHandler.deletePoll);
+		
+	app.route('/edit')
+		.get(isLoggedIn, function(req, res) {
+			res.sendFile(path + '/public/edit.html');
+		});
+	app.route('/edit/:pollid')
+		.post(isLoggedIn, pollHandler.editPoll);
+	 
+
 };

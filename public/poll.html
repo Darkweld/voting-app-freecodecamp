@@ -14,13 +14,22 @@
 		<p>|</p>
 		<a class="menu" href="/logout">Logout</a>
 	</header>
+
+	<body>
 	
 		<div class="container">
 			<div class = "title">
-			<h1>List of polls</h1>
 			</div>
-			<div class = "form-container">
+			<div class="form-container">
+			<form id = "formy">
 			<span id="polls"></span>
+			</div>
+			<div class="btn-container" id = "submitContainer">
+			<input type = "submit" value = "Submit Vote" id = "submitVote">
+			</div>
+			</form>
+			<div class = "chart-container">
+			<canvas id="myChart"></canvas>
 			</div>
 			<div class="btn-container">
 				<a class="menu" href="/">Home</a>
@@ -32,7 +41,8 @@
 		</div>
 		
 		<script type="text/javascript" src="common/ajax-functions.js"></script>
-		<script type="text/javascript" src="controllers/pollController.client.js"></script>
+		<script type="text/javascript" src="node_modules/Chart.bundle.js"></script>
+		<script type="text/javascript" src="controllers/pollControllerview.client.js"></script>
 		<script type="text/javascript" src="controllers/userController.client.js"></script>
 		
 	</body>
