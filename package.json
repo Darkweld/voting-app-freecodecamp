@@ -1,7 +1,7 @@
 {
-  "name": "clementinejs-fcc",
+  "name": "FreeCodeCamp voting app",
   "version": "1.0.1",
-  "description": "The elegant and lightweight boilerplate for full stack JavaScript.",
+  "description": "Voting app using clementinejs boilerplate",
   "main": "server.js",
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   ],
   "scripts": {
     "start": "node server.js"
+  },
+  "engines": {
+    "node": "8.1.2"
   },
   "author": "Blake Johnston",
   "license": "MIT",
